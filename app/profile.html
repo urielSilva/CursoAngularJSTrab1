@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
+    <link rel="stylesheet" href="app.css">
+    <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body ng-app="enejApp">
+    <div ng-controller="registrationController as registration" >
+        <form name="form" action="" ng-submit="form.$valid && registration.enviarForm()">
+            <div>
+                <input type="text" required name="nomeUsuario" ng-model=""/>
+            </div>
+
+            <br/>
+            <div>
+                <input type="email" required name="email" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="password" required name="senha" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="nome" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="sobrenome" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="nomeCracha" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="cpf" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="rg" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="sexo" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="cep" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="pais" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="estado" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="cidade" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="bairro" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="endereco" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="numero" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="complemento" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="dataNascimento" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="universidade" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="curso" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="periodo" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="federacao" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="ej" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="cargoEj" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="tamanhoCamisa" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="necessidades" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="descNecessidade" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="dieta" ng-model=""/>
+            </div>
+            <br/>
+
+            <div>
+                <input type="text" required name="alergia" ng-model=""/>
+            </div>
+            <br/>
+
+            <input type="submit"  />
+        </form>
+    </div>
+</body>
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="app.js"></script>
+<script src="registration/registration.js"></script>
+</html>
