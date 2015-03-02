@@ -9,163 +9,344 @@
     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
     <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-<body ng-app="enejApp">
-    <div ng-controller="registrationController as registration" >
-        <form name="form" action="" ng-submit="form.$valid && registration.enviarForm()">
-            <div>
-                <input type="text" required name="nomeUsuario" ng-model=""/>
+<body ng-app="enejApp" >
+    <div ng-controller="profileController as profile" class="container" >
+        <form class="form-horizontal" name="form" action="" ng-submit="form.$valid && profile.register()">
+
+            <div class="form-group col-md-12" ng-class="{'has-error': profile.hasErrors(form,'nomeuser') }">
+                <div class="col-md-4">
+                    <label class="control-label" for="nomeuser">Nome de Usuário:</label>
+                    <input  name="nomeuser" id="nomeuser" class="form-control" type="text" required ng-model="profile.user.nomeuser"/>
+                    <div class="help-block" ng-show="profile.hasErrors(form,'email')">
+                        Nome de Usuário obrigatório.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-12" ng-class="{'has-error': profile.hasErrors(form,'email')}">
+                <div class="col-md-4">
+                    <label class="control-label" for="email">Email:</label>
+                    <input id="email" type="email" class="form-control" required name="email" ng-model="profile.user.email"/>
+                    <div class="help-block" ng-show="profile.hasErrors(form,'email')">
+                        Email obrigatório.
+                    </div>
+                </div>
             </div>
 
-            <br/>
-            <div>
-                <input type="email" required name="email" ng-model=""/>
+            <div class="form-group col-md-12" ng-class="{'has-error': profile.hasErrors(form,'senha')}">
+                <div class="col-md-4">
+                    <label class="control-label" for="senha">Senha:</label>
+                    <input id="senha" class="form-control" type="password" required name="senha" ng-model="profile.user.senha"/>
+                    <div class="help-block" ng-show="profile.hasErrors(form,'senha')">
+                        Senha obrigatória.
+                    </div>
+                </div>
             </div>
-            <br/>
 
-            <div>
-                <input type="password" required name="senha" ng-model=""/>
+            <div class="form-group col-md-12" ng-class="{'has-error': profile.hasErrors(form,'nome')}">
+                <div class="col-md-5">
+                    <label class="control-label" for="nome">Nome:</label>
+                    <input id="nome" type="text" class="form-control" required name="nome" ng-model="profile.user.nome"/>
+                    <div  class="help-block" ng-show="profile.hasErrors(form,'nome')">
+                        Nome obrigatório.
+                    </div>
+                </div>
             </div>
-            <br/>
 
-            <div>
-                <input type="text" required name="nome" ng-model=""/>
+            <div class="form-group col-md-12" ng-class="{'has-error': profile.hasErrors(form,'sobrenome')}">
+                <div class="col-md-6">
+                    <label class="control-label" for="sobrenome">Sobrenome:</label>
+                    <input id="sobrenome" type="text" class="form-control" required name="sobrenome" ng-model="profile.user.sobrenome"/>
+                    <div  class="help-block" ng-show="profile.hasErrors(form,'sobrenome')">
+                        Sobrenome obrigatório.
+                    </div>
+                </div>
             </div>
-            <br/>
 
-            <div>
-                <input type="text" required name="sobrenome" ng-model=""/>
+            <div class="form-group col-md-12" ng-class="{'has-error' : profile.hasErrors(form,'nomeCracha')}">
+                <div class="col-md-6">
+                    <label class="control-label" for="nomeCracha">Nome do Crachá:</label>
+                    <input class="form-control" id="nomeCracha" type="text" required name="nomeCracha" ng-model="profile.user.nomeCracha"/>
+                    <div class="help-block" ng-show="profile.hasErrors(form,'nomeCracha')">
+                        Nome do crachá obrigatório.
+                    </div>
+                </div>
             </div>
-            <br/>
 
-            <div>
-                <input type="text" required name="nomeCracha" ng-model=""/>
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'cpf')}">
+                <div class="col-md-12">
+                    <label class="control-label" for="cpf">CPF:</label>
+                    <input id="cpf" class="form-control" type="text" required name="cpf" ng-model="profile.user.cpf"/>
+                    <div  class="help-block" ng-show="profile.hasErrors(form,'cpf')">
+                        CPF obrigatório.
+                    </div>
+                </div>
             </div>
-            <br/>
 
-            <div>
-                <input type="text" required name="cpf" ng-model=""/>
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'rg')}">
+                <div class="col-md-12">
+                    <label class="control-label" for="rg">RG:</label>
+                    <input id="rg" class="form-control" type="text" required name="rg" ng-model="profile.user.rg"/>
+                    <div class="help-block" ng-show="profile.hasErrors(form,'rg')">
+                        RG obrigatório.
+                    </div>
+                </div>
             </div>
-            <br/>
 
-            <div>
-                <input type="text" required name="rg" ng-model=""/>
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'sexo')}">
+                <div class="col-md-12">
+                    <label class="control-label" for="sexo">Sexo:</label>
+                    <select id="sexo" class="form-control" name="sexo"  required>
+                        <option value="m" ng-model="profile.user.sexo">Masculino</option>
+                        <option value="f" ng-model="profile.user.sexo">Feminino</option>
+                    </select>
+                    <div  class="help-block" ng-show="profile.hasErrors(form,'sexo')">
+                        Sexo obrigatório.
+                    </div>
+                </div>
             </div>
-            <br/>
 
-            <div>
-                <input type="text" required name="sexo" ng-model=""/>
-            </div>
-            <br/>
-
-            <div>
-                <input type="text" required name="cep" ng-model=""/>
-            </div>
-            <br/>
-
-            <div>
-                <input type="text" required name="pais" ng-model=""/>
-            </div>
-            <br/>
-
-            <div>
-                <input type="text" required name="estado" ng-model=""/>
-            </div>
-            <br/>
-
-            <div>
-                <input type="text" required name="cidade" ng-model=""/>
-            </div>
-            <br/>
-
-            <div>
-                <input type="text" required name="bairro" ng-model=""/>
-            </div>
-            <br/>
-
-            <div>
-                <input type="text" required name="endereco" ng-model=""/>
-            </div>
-            <br/>
-
-            <div>
-                <input type="text" required name="numero" ng-model=""/>
-            </div>
-            <br/>
-
-            <div>
-                <input type="text" required name="complemento" ng-model=""/>
-            </div>
-            <br/>
-
-            <div>
-                <input type="text" required name="dataNascimento" ng-model=""/>
-            </div>
-            <br/>
-
-            <div>
-                <input type="text" required name="universidade" ng-model=""/>
-            </div>
-            <br/>
-
-            <div>
-                <input type="text" required name="curso" ng-model=""/>
-            </div>
-            <br/>
-
-            <div>
-                <input type="text" required name="periodo" ng-model=""/>
-            </div>
-            <br/>
-
-            <div>
-                <input type="text" required name="federacao" ng-model=""/>
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'cep')}">
+                <div class="col-md-8">
+                    <label for="cep" class="control-label">CEP:</label>
+                    <input type="text" id="cep" class="form-control" required name="cep" ng-model="profile.user.cep"/>
+                    <div class="help-block" ng-show="profile.hasErrors(form,'cep')">
+                        CEP obrigatório.
+                    </div>
+                </div>
             </div>
             <br/>
 
-            <div>
-                <input type="text" required name="ej" ng-model=""/>
+            <div class="form-group col-md-8" ng-class="{'has-error' : profile.hasErrors(form,'pais')}">
+                <div class="col-md-6" >
+                    <label for="pais" class="control-label">País:</label>
+                    <input id="pais" class="form-control" type="text" required name="pais" ng-model="profile.user.pais"/>
+                    <div class="help-block" ng-show="profile.hasErrors(form,'pais')">
+                        País obrigatório.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'estado')}">
+                <div class="col-md-12">
+                    <label for="estado" class="control-label">Estado:</label>
+                    <input  id="estado" class="form-control" type="text" required name="estado" ng-model="profile.user.estado"/>
+                    <div class="help-block" ng-show="profile.hasErrors(form,'estado')">
+                        Estado obrigatório.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'cidade')}">
+                <div class="col-md-12">
+                    <label for="cidade" class="control-label">Cidade:</label>
+                    <input id="cidade" class="form-control" type="text" required name="cidade" ng-model="profile.user.cidade"/>
+                    <div  class="help-block" ng-show="profile.hasErrors(form,'cidade')">
+                        Cidade obrigatória.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'bairro')}">
+                <div class="col-md-12">
+                    <label for="bairro" class="control-label">Bairro:</label>
+                    <input id="bairro"  class="form-control" type="text" required name="bairro" ng-model="profile.user.bairro"/>
+                    <div class="help-block" ng-show="profile.hasErrors(form,'bairro')">
+                        Bairro obrigatório.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-6" ng-class="{'has-error' : profile.hasErrors(form,'endereco')}">
+                <div class="col-md-12">
+                    <label for="endereco" class="control-label">Endereço:</label>
+                    <textarea id="endereco" class="form-control" ng-model="profile.user.endereco" name="endereco" required cols="20" rows="5"></textarea>
+                    <div class="help-block" ng-show="profile.hasErrors(form,'endereco')">
+                        Endereço obrigatório.
+                    </div>
+                </div>
             </div>
             <br/>
 
-            <div>
-                <input type="text" required name="cargoEj" ng-model=""/>
+            <div class="form-group col-md-6" ng-class="{'has-error' : profile.hasErrors(form,'complemento')}">
+                <div class="col-md-12">
+                    <label for="complemento" class="control-label">Complemento:</label>
+                    <textarea id="complemento" class="form-control" name="complemento" required cols="30" rows="5" ng-model="profile.user.complemento"></textarea>
+                    <div class="help-block" ng-show="profile.hasErrors(form,'endereco')">
+                        Complemento obrigatório.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6" ng-class="{'has-error' : profile.hasErrors(form,'numero')}">
+                <div class="col-md-8">
+                    <label for="numero" class="control-label">Número:</label>
+                    <input  id="numero" class="form-control" type="text" required name="numero" ng-model="profile.user.numero"/>
+                    <div  class="help-block" ng-show="profile.hasErrors(form,'numero')">
+                        Número obrigatório.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6" ng-class="{'has-error' : profile.hasErrors(form,'dataNascimento')}">
+                <div class="col-md-8">
+                    <label for="dataNascimento" class="control-label">Data de Nascimento:</label>
+                    <input  id="dataNascimento" class="form-control" type="text" required name="dataNascimento" ng-model="profile.user.dataNascimento"/>
+                    <div  class="help-block" ng-show="profile.hasErrors(form,'dataNascimento')">
+                        Data de Nascimento obrigatória.
+                    </div>
+                </div>
             </div>
             <br/>
 
-            <div>
-                <input type="text" required name="tamanhoCamisa" ng-model=""/>
+            <div class="form-group col-md-4" ng-class="{'has-error': profile.hasErrors(form,'universidade')}">
+                <div class="col-md-10">
+                    <label for="universidade" class="control-label">Universidade:</label>
+                    <input  id="universidade" class="form-control" type="text" required name="universidade" ng-model="profile.user.universidade"/>
+                    <div class="help-block"  ng-show="profile.hasErrors(form,'universidade')">
+                        Universidade obrigatória.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'curso')}">
+                <div class="col-md-10">
+                    <label for="curso" class="control-label">Curso: </label>
+                    <input  id="curso"  class="form-control" type="text" required name="curso" ng-model="profile.user.curso"/>
+                    <div  class="help-block" ng-show="profile.hasErrors(form,'curso')">
+                        Curso obrigatório.
+                    </div>
+                </div>
             </div>
             <br/>
 
-            <div>
-                <input type="text" required name="necessidades" ng-model=""/>
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'periodo')}">
+                <div class="col-md-10">
+                    <label for="periodo" class="control-label">Período:</label>
+                    <input id="periodo" class="form-control" type="text" required name="periodo" ng-model="profile.user.periodo"/>
+                    <div  class="help-block" ng-show="profile.hasErrors(form,'periodo')">
+                        Período obrigatório.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'federacao')}">
+                <div class="col-md-10">
+                    <label for="federacao" class="control-label">Federação:</label>
+                    <input  id="federacao" class="form-control" type="text" required name="federacao" ng-model="profile.user.federacao"/>
+                    <div  class="help-block" ng-show="profile.hasErrors(form,'federacao')">
+                        Federação obrigatória.
+                    </div>
+                </div>
             </div>
             <br/>
 
-            <div>
-                <input type="text" required name="descNecessidade" ng-model=""/>
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'ej')}">
+                <div class="col-md-10">
+                    <label for="ej" class="control-label">EJ:</label>
+                    <input  id="ej" class="form-control" type="text" required name="ej" ng-model="profile.user.ej"/>
+                    <div  class="help-block" ng-show="profile.hasErrors(form,'ej')">
+                        EJ obrigatória.
+                    </div>
+                </div>
             </div>
-            <br/>
 
-            <div>
-                <input type="text" required name="dieta" ng-model=""/>
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'cargoEj')}">
+                <div class="col-md-10">
+                    <label for="cargoEj" class="control-label">Cargo na EJ:</label>
+                    <input  id="cargoEj" class="form-control" type="text" required name="cargoEj" ng-model="profile.user.cargoEj"/>
+                    <div  class="help-block" ng-show="profile.hasErrors(form,'cargoEj')">
+                        Cargo na EJ obrigatório.
+                    </div>
+                </div>
             </div>
-            <br/>
 
-            <div>
-                <input type="text" required name="alergia" ng-model=""/>
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'tamanhoCamisa')}">
+                <div class="col-md-8">
+                    <div class="col-md-12">
+                        <label class="control-label">Tamanho da Camisa:</label>
+                    </div>
+                    <label class="radio-inline">
+                        <input type="radio" value="P" required name="tamanhoCamisa" ng-model="profile.user.tamanhoCamisa"/> P
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" value="P" required name="tamanhoCamisa" ng-model="profile.user.tamanhoCamisa"/> M
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" value="P" required name="tamanhoCamisa" ng-model="profile.user.tamanhoCamisa"/> G
+                    </label>
+                    <div  class="help-block" ng-show="profile.hasErrors(form,'tamanhoCamisa')">
+                        Tamanho da Camisa obrigatório.
+                    </div>
+                </div>
             </div>
-            <br/>
 
-            <input type="submit"  />
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'necessidades')}">
+                <div class="col-md-12">
+                    <label class="control-label">Tem necessidades especiais?</label>
+                </div>
+                <label class="radio-inline">
+                    <input type="radio" value="S" required name="necessidades" ng-model="profile.user.necessidades"/> Sim
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" value="N" required name="necessidades" ng-model="profile.user.necessidades"/> Não
+                </label>
+                <div  class="help-block" ng-show="profile.hasErrors(form,'necessidades')">
+                    Necessidades obrigatória.
+                </div>
+            </div>
+
+            <div class="form-group col-md-4" >
+                <div class="col-md-12">
+                    <label for="descNecessidade" class="control-label">Qual?:</label>
+                    <textarea class="form-control" name="descNecessidade" id="descNecessidade" cols="20" rows="5" ng-model="profile.user.descNecessidade"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6" ng-class="{'has-error' : profile.hasErrors(form,'dieta')}">
+                <div class="col-md-12">
+                    <label class="control-label">Dieta especial?:</label>
+                </div>
+                <label class="radio-inline">
+                     <input type="radio" value="S" required name="dieta" ng-model="profile.user.dieta"/> Sim
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" value="N" required name="dieta" ng-model="profile.user.dieta"/> Não
+                </label>
+                <div  class="help-block" ng-show="profile.hasErrors(form,'dieta')">
+                    Dieta obrigatória.
+                </div>
+            </div>
+
+            <div class="form-group col-md-6" ng-class="{'has-error' : profile.hasErrors(form,'alergia')}">
+                <div class="col-md-12">
+                    <label class="control-label">Intolerância ou alergia?</label>
+                </div>
+                <label class="radio-inline">
+                    <input type="radio" value="S" required name="alergia" ng-model="profile.user.alergia"/> Sim
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" value="N" required name="alergia" ng-model="profile.user.alergia"/> Não
+                </label>
+                <div class="help-block" ng-show="profile.hasErrors(form,'alergia')">
+                    Alergia obrigatória.
+                </div>
+            </div>
+            <div ng-click="profile.submitted = true;" class="col-md-12">
+                <input type="submit"  class="btn btn-primary" value="Enviar" />
+            </div>
         </form>
     </div>
 </body>
 
+
+<script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+<script type="text/javascript">
+    var myFirebaseRef = new Firebase("https://burning-fire-6305.firebaseio.com/");
+</script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="app.js"></script>
-<script src="registration/registration.js"></script>
+<script src="profile/profile.js"></script>
 </html>

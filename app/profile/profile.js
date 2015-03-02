@@ -3,7 +3,8 @@
  */
 
 enejApp.controller('profileController', function() {
-    this.usuario =
+    this.submitted = false;
+    this.user =
     {
         "nomeUsuario" : "",
         "email" : "",
@@ -32,6 +33,16 @@ enejApp.controller('profileController', function() {
         "necessidades" : "",
         "descNecessidade" : "",
         "dieta" : "",
-        "alergia" : "",
+        "alergia" : ""
+
+    };
+
+    this.hasErrors = function(form, field) {
+        return this.submitted && form[field].$error.required;
+    };
+
+    this.register = function() {
+      console.log(this.user);
+      myFirebaseRef.set(this.user);
     };
 });
