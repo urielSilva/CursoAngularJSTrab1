@@ -111,12 +111,13 @@
                 </div>
             </div>
 
-            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'cep')}">
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'cep') || profile.hasNumericErrors(form,'cep')}">
                 <div class="col-md-8">
                     <label for="cep" class="control-label">CEP:</label>
-                    <input type="text" id="cep" class="form-control" required name="cep" ng-model="profile.user.cep"/>
-                    <div class="help-block" ng-show="profile.hasErrors(form,'cep')">
-                        CEP obrigatório.
+                    <input type="number" id="cep" class="form-control" required name="cep" ng-model="profile.user.cep"/>
+                    <div class="help-block" ng-show="profile.hasErrors(form,'cep') || profile.hasNumericErrors(form,'cep')">
+                        <span ng-show="profile.hasErrors(form,'cep') && !profile.hasNumericErrors(form,'cep')">CEP obrigatório.</span>
+                        <span ng-show="profile.hasNumericErrors(form,'cep')">O campo deve conter apenas números.</span>
                     </div>
                 </div>
             </div>
@@ -182,12 +183,14 @@
                 </div>
             </div>
 
-            <div class="form-group col-md-6" ng-class="{'has-error' : profile.hasErrors(form,'numero')}">
+            <div class="form-group col-md-6" ng-class="{'has-error' : profile.hasErrors(form,'numero') || profile.hasNumericErrors(form,'numero') || (profile.submitted && form.numero.$error.minlength)}">
                 <div class="col-md-8">
                     <label for="numero" class="control-label">Número:</label>
-                    <input  id="numero" class="form-control" type="text" required name="numero" ng-model="profile.user.numero"/>
-                    <div  class="help-block" ng-show="profile.hasErrors(form,'numero')">
-                        Número obrigatório.
+                    <input  id="numero" class="form-control" type="number" ng-minlength="1" required name="numero" ng-model="profile.user.numero"/>
+                    <div  class="help-block" ng-show="profile.hasErrors(form,'numero') || profile.hasNumericErrors(form,'numero') || (profile.submitted && form.numero.$error.minlength)">
+                        <span ng-show="profile.hasErrors(form,'numero') && !profile.hasNumericErrors(form,'numero')">Número obrigatório.</span>
+                        <span ng-show="hasNumericErrors(form,'numero')">O campo deve conter apenas números.</span>
+                        <span ng-show="profile.submitted && form.numero.$error.minlength">O campo deve conter 1 ou mais caracteres.</span>
                     </div>
                 </div>
             </div>
