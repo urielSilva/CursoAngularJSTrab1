@@ -41,6 +41,9 @@ enejApp.controller('profileController', function() {
         return this.submitted && form[field].$error.required;
     };
 
+    this.hasNumericErrors = function(form,field) {
+        return this.submitted && form[field].$error.number;
+    }
     this.register = function() {
       console.log(this.user);
       myFirebaseRef.set(this.user);

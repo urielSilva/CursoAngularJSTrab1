@@ -15,7 +15,6 @@
 <body ng-app="enejApp" >
     <div ng-controller="profileController as profile" class="container" >
         <form class="form-horizontal" name="form" action="" ng-submit="form.$valid && profile.register()">
-
             <div class="form-group col-md-12" ng-class="{'has-error': profile.hasErrors(form,'nomeuser') }">
                 <div class="col-md-4">
                     <label class="control-label" for="nomeuser">Nome de Usuário:</label>
@@ -75,32 +74,36 @@
                 </div>
             </div>
 
-            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'cpf')}">
+            <div class="form-group col-md-4" ng-class="{'has-error' : (profile.submitted && (form.cpf.$error.maxlength || form.cpf.$error.minlength)) || profile.hasErrors(form,'cpf') || profile.hasNumericErrors(form,'cpf')}">
                 <div class="col-md-12">
                     <label class="control-label" for="cpf">CPF:</label>
-                    <input id="cpf" class="form-control" type="text" required name="cpf" ng-model="profile.user.cpf"/>
-                    <div  class="help-block" ng-show="profile.hasErrors(form,'cpf')">
-                        CPF obrigatório.
+                    <input id="cpf" type="number" name="cpf" ng-model="profile.user.cpf"
+                           ng-maxlength="11" ng-minlength="11" required class="form-control"/>
+                    <div  class="help-block" ng-show="(profile.submitted && (form.cpf.$error.maxlength || form.cpf.$error.minlength)) || profile.hasErrors(form,'cpf') || profile.hasNumericErrors(form,'cpf') ">
+                    <span ng-show="profile.hasErrors(form,'cpf') && !profile.hasNumericErrors(form,'cpf')">CPF obrigatório.</span>
+                    <span ng-show="profile.hasNumericErrors(form,'cpf')">O campo deve conter apenas números.</span>
+                    <span ng-show="profile.submitted && (form.cpf.$error.maxlength || form.cpf.$error.minlength)">O campo deve conter 11 caracteres.</span>
+                </div>
+                </div>
+            </div>
+            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'rg') || hasNumericErrors(form,'rg')}">
+                <div class="col-md-12">
+                    <label class="control-label" for="rg">RG:</label>
+                    <input id="rg" class="form-control" type="number" required name="rg" ng-model="profile.user.rg"/>
+                    <div class="help-block" ng-show="profile.hasErrors(form,'rg') || profile.hasNumericErrors(form,'rg')">
+                        <span ng-show="profile.hasErrors(form,'rg') && !profile.hasNumericErrors(form,'rg')">RG obrigatório.</span>
+                        <span ng-show="profile.hasNumericErrors(form,'rg')">O campo deve conter apenas números</span>
                     </div>
                 </div>
             </div>
 
-            <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'rg')}">
-                <div class="col-md-12">
-                    <label class="control-label" for="rg">RG:</label>
-                    <input id="rg" class="form-control" type="text" required name="rg" ng-model="profile.user.rg"/>
-                    <div class="help-block" ng-show="profile.hasErrors(form,'rg')">
-                        RG obrigatório.
-                    </div>
-                </div>
-            </div>
 
             <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'sexo')}">
                 <div class="col-md-12">
                     <label class="control-label" for="sexo">Sexo:</label>
-                    <select id="sexo" class="form-control" name="sexo"  required>
-                        <option value="m" ng-model="profile.user.sexo">Masculino</option>
-                        <option value="f" ng-model="profile.user.sexo">Feminino</option>
+                    <select id="sexo" class="form-control" name="sexo" ng-model="profile.user.sexo" required>
+                        <option value="m" >Masculino</option>
+                        <option value="f" >Feminino</option>
                     </select>
                     <div  class="help-block" ng-show="profile.hasErrors(form,'sexo')">
                         Sexo obrigatório.
@@ -349,4 +352,12 @@
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="app.js"></script>
 <script src="profile/profile.js"></script>
+<script>
+    angular.module('numberExample', [])
+            .controller('ExampleController', ['$scope', function($scope) {
+                $scope.example = {
+                    value: 12
+                };
+            }]);
+</script>
 </html>
