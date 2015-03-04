@@ -3,6 +3,9 @@
  */
 
 enejApp.controller('profileController', function() {
+
+    var controller = this;
+
     this.submitted = false;
     this.user =
     {
@@ -37,15 +40,31 @@ enejApp.controller('profileController', function() {
 
     };
 
+    this.estado = {};
+
+    this.cidades = ["Teste","teste"];
+
+    this.listaEstados = [
+        {nome : 'Distrito Federal', "cidades" : ["Plano Piloto", "Taguatinga", "Sobradinho", "Águas Claras"]},
+        {nome : 'São Paulo', "cidades" : ["São Paulo", "Ribeirão Preto", "Campinas", "Pirassununga"]},
+        {nome : 'Rio de Janeiro', "cidades" : ["Rio de Janeiro", "Cabo Frio", "Teresópolis", "Petrópolis"]},
+        {nome : 'Minas Gerais', "cidades" : ["Belo Horizonte", "Uberlândia", "Uberaba", "Paracatu"]},
+        {nome : 'Goiás', "cidades" : ["Goiânia", "Diamantica", "Luziânia", "Pirenópolis"]},
+    ];
+
     this.hasErrors = function(form, field) {
         return this.submitted && form[field].$error.required;
     };
 
     this.hasNumericErrors = function(form,field) {
         return this.submitted && form[field].$error.number;
-    }
+    };
+
+
+
     this.register = function() {
-      console.log(this.user);
+      this.user.estado = this.estado.nome;
+        console.log(this.user);
       myFirebaseRef.set(this.user);
     };
 });

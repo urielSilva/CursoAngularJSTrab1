@@ -14,7 +14,10 @@
 </head>
 <body ng-app="enejApp" >
     <div ng-controller="profileController as profile" class="container" >
-        <form class="form-horizontal" name="form" action="" ng-submit="form.$valid && profile.register()">
+        <form class="form-horizontal" name="form" action="" novalidate ng-submit="form.$valid && profile.register()">
+
+
+
             <div class="form-group col-md-12" ng-class="{'has-error': profile.hasErrors(form,'nomeuser') }">
                 <div class="col-md-4">
                     <label class="control-label" for="nomeuser">Nome de Usuário:</label>
@@ -136,7 +139,8 @@
             <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'estado')}">
                 <div class="col-md-12">
                     <label for="estado" class="control-label">Estado:</label>
-                    <input  id="estado" class="form-control" type="text" required name="estado" ng-model="profile.user.estado"/>
+                    <select name="estado"  class="form-control" required id="estado" ng-model="profile.estado" ng-options="e.nome for e in profile.listaEstados">
+                    </select>
                     <div class="help-block" ng-show="profile.hasErrors(form,'estado')">
                         Estado obrigatório.
                     </div>
@@ -146,7 +150,8 @@
             <div class="form-group col-md-4" ng-class="{'has-error' : profile.hasErrors(form,'cidade')}">
                 <div class="col-md-12">
                     <label for="cidade" class="control-label">Cidade:</label>
-                    <input id="cidade" class="form-control" type="text" required name="cidade" ng-model="profile.user.cidade"/>
+                    <select id="cidade" class="form-control" required name="cidade" ng-model="profile.user.cidade" ng-options="c for c in profile.estado.cidades">
+                    </select>
                     <div  class="help-block" ng-show="profile.hasErrors(form,'cidade')">
                         Cidade obrigatória.
                     </div>
